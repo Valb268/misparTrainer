@@ -24,6 +24,10 @@ start_button.addEventListener('click', e => {
     }
     number = generate(chosenDigits);
     playNumber(number);
+    if (result.children.length > 0) {
+        result.removeChild(result.firstElementChild);
+    }
+
     // playNumber(1100);
 });
 
