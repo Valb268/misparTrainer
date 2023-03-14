@@ -1,21 +1,12 @@
-const formDigits = document.querySelector("#digitsAmount");
-const log = document.querySelector("#log");
 let chosenDigits = 0;
 let number = -1;
 let userAnswer = 0;
 
-
-formDigits.addEventListener(
-    "submit",
-    (event) => {
-        const data = new FormData(formDigits);
-        for (const entry of data) {
-            chosenDigits = entry[1];
-        }
-        event.preventDefault();
-    },
-    false
-);
+document.querySelector("div.btn-group").addEventListener("click", function (event) {
+    if (event.target.type === "radio") {
+        chosenDigits = event.target.value;
+    }
+});
 
 start_button.addEventListener('click', e => {
     // in case no digits chosen, number of digits is set randomly
@@ -24,11 +15,20 @@ start_button.addEventListener('click', e => {
     }
     number = generate(chosenDigits);
     playNumber(number);
+    answer.focus();
+
+    // playNumber(6006);
+
     if (result.children.length > 0) {
         result.removeChild(result.firstElementChild);
     }
+});
 
-    // playNumber(1100);
+repeat_button.addEventListener('click', e => {
+    if (number > 0) {
+        playNumber(number);
+        answer.focus();
+    }
 });
 
 answer_button.addEventListener('click', e => submitAnswer());
@@ -36,7 +36,7 @@ answer.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
         submitAnswer();
     }
-})
+});
 
 function generate(digits) {
     return Math.floor(Math.random() * 10 ** digits + 1);
@@ -112,24 +112,14 @@ function getComponentOfNumber(number, componentIndex) {
     return component * 10 ** (componentIndex - 1);
 }
 
-function createPlaylist(first, second, third, fourth) {
+function createPlaylist(...digits) {
     const playlist = new Gapless5();
     playlist.setCrossfade(140);
-    playlist.addTrack(pathMaker(first));
-    if (second) {
-        playlist.addTrack(pathMaker(second));
-    }
-    if (third) {
-        playlist.addTrack(pathMaker(third));
-    }
-    if (fourth) {
-        playlist.addTrack(pathMaker(fourth));
-    }
-    // console.log(playlist.getTracks());
+    digits.filter(digit => digit !== 0).forEach(num => {
+        playlist.addTrack(pathMaker(num))
+    });
     return playlist;
 }
-
-
 
 function playBeforeTen(digit) {
     const path = './audio/count/1-10/';

@@ -1,3 +1,19 @@
 fieldset.digitsAmount {
     width: 300px;
 }
+.btn-group {
+    width: 300px;
+    height: 70px;
+    border: 1px solid black;
+    margin: 10px 0;
+}
+.legend {
+    text-align: center;
+}
+.digits {
+    margin-top: 10px;
+    text-align: center;
+}
+#repeat_button {
+    margin-left: 10px;
+}
