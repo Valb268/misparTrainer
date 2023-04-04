@@ -17,3 +17,10 @@ fieldset.digitsAmount {
 #repeat_button {
     margin-left: 10px;
 }
+.answers {
+    display: flex;
+    margin: 0;
+}
+.answers > p {
+    margin: 0 10px;
+}

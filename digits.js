@@ -1,6 +1,7 @@
 let chosenDigits = 0;
 let number = -1;
 let userAnswer = 0;
+let successInARow = 0;
 
 document.querySelector("div.btn-group").addEventListener("click", function (event) {
     if (event.target.type === "radio") {
@@ -11,7 +12,7 @@ document.querySelector("div.btn-group").addEventListener("click", function (even
 start_button.addEventListener('click', e => {
     // in case no digits chosen, number of digits is set randomly
     if (chosenDigits === 0) {
-        chosenDigits = Math.floor(Math.random() * 4 + 1);
+        chosenDigits = Math.round(Math.random() * 4 + 1);
     }
     number = generate(chosenDigits);
     playNumber(number);
@@ -39,7 +40,9 @@ answer.addEventListener('keyup', e => {
 });
 
 function generate(digits) {
-    return Math.floor(Math.random() * 10 ** digits + 1);
+    const min = 10 ** (digits - 1);
+    const max = 10 ** digits;
+    return min + Math.round(Math.random() * (max - min));
 }
 
 
@@ -132,7 +135,7 @@ function playBeforeTen(digit) {
 
 
 function submitAnswer() {
-    if (answer.value && !isNaN(answer.value)) {
+    if (answer.value && isFinite(answer.value)) {
         userAnswer = +answer.value;
         checkResult();
         answer.value = '';
@@ -144,9 +147,11 @@ function checkResult() {
     let textResult = '';
 
     if (userAnswer === number) {
+        successInARow++;
         textResult = document.createTextNode('Верно!');
     } else {
         textResult = document.createTextNode(`Правильный ответ: ${number}`);
+        successInARow = 0;
     }
     const par = document.createElement('p');
     par.appendChild(textResult);
@@ -156,8 +161,22 @@ function checkResult() {
     } else {
         result.appendChild(par);
     }
+    showSuccess();
 }
 
+function showSuccess() {
+    const h3 = document.createElement('h3');
+    h3.style.marginBottom = '0px';
+    h3.style.marginLeft = '2px';
+    h3.style.marginTop = '0';
+    let textSuccess = document.createTextNode(successInARow);
+    h3.appendChild(textSuccess);
+    if (success.children.length > 2) {
+        success.replaceChild(h3, success.lastElementChild);
+    } else {
+        success.appendChild(h3);
+    }
+}
 
 // function playDigit(digit) {
 //     const path = './audio/count/';
