@@ -2,6 +2,7 @@ let chosenDigits = 0;
 let number = -1;
 let userAnswer = 0;
 let successInARow = 0;
+let isSubmitted = false;
 
 document.querySelector("div.btn-group").addEventListener("click", function (event) {
     if (event.target.type === "radio") {
@@ -17,9 +18,7 @@ start_button.addEventListener('click', e => {
     number = generate(chosenDigits);
     playNumber(number);
     answer.focus();
-
-    // playNumber(6006);
-
+    isSubmitted = false;
     if (result.children.length > 0) {
         result.removeChild(result.firstElementChild);
     }
@@ -47,12 +46,9 @@ function generate(digits) {
 
 
 function playNumber(number) {
-    // console.log(`number is ${number}`);
     if (number < 11) {
         playBeforeTen(number);
     } else if (number < 20) {
-        // playDigit(number % 10);
-        // play.addEventListener('ended', (e) => playDigit('1-'), {once: true});
         createPlaylist(number).play();
     } else if (number < 100) {
         if ((number % 10) > 0) {
@@ -138,6 +134,7 @@ function submitAnswer() {
     if (answer.value && isFinite(answer.value)) {
         userAnswer = +answer.value;
         checkResult();
+        isSubmitted = true;
         answer.value = '';
     }
 }
@@ -147,7 +144,9 @@ function checkResult() {
     let textResult = '';
 
     if (userAnswer === number) {
-        successInARow++;
+        if (!isSubmitted) {
+            successInARow++;
+        }
         textResult = document.createTextNode('Верно!');
     } else {
         textResult = document.createTextNode(`Правильный ответ: ${number}`);
@@ -177,44 +176,3 @@ function showSuccess() {
         success.appendChild(h3);
     }
 }
-
-// function playDigit(digit) {
-//     const path = './audio/count/';
-//     const ext = '.m4a';
-//     const player = document.getElementById('play');
-//     player.autoplay;
-//     player.src = path + digit + ext;
-//     player.type = "audio/x-m4a";
-//     // player.type = "audio/wav";
-// }
-//
-//
-// function createPlaylist11_19(number) {
-//     const playlist = new Gapless5();
-//     playlist.setCrossfade(130);
-//     playlist.addTrack(pathMaker('1-10/' + number % 10));
-//     playlist.addTrack(pathMaker(10));
-//     return playlist;
-// }
-//
-// function createPlaylist21_99(number) {
-//     const playlist = new Gapless5();
-//     playlist.setCrossfade(80);
-//     playlist.addTrack(pathMaker(number - number % 10));
-//     if ((number % 10) > 0) {
-//         playlist.addTrack(pathMaker(number % 10));
-//     }
-//     console.log(playlist.getTracks());
-//     return playlist;
-// }
-//
-// function createPlaylist100_999(number) {
-//     const playlist = new Gapless5();
-//     playlist.setCrossfade(80);
-//     playlist.addTrack(pathMaker(number - number % 10));
-//     if ((number % 10) > 0) {
-//         playlist.addTrack(pathMaker(number % 10));
-//     }
-//     console.log(playlist.getTracks());
-//     return playlist;
-// }
