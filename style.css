@@ -38,8 +38,12 @@ html {
     font-family: 'Caveat', cursive;
     font-size: 20px;
     background-color: #cc7444;
+    box-shadow: 5px 5px 13px 1px black;
 }
 
+.buttons:active {
+    box-shadow: 0 0 0 0;
+}
 
 #answer_getter {
     display: flex;
