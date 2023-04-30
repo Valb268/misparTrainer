@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>מספרי מאמן</title>
+    <title>Mispar trainer</title>
     <script src="./digits.js" defer></script>
     <script src="gapless5.js" type="text/javascript" defer></script>
     <link href="./style.css" rel="stylesheet">
@@ -14,34 +14,37 @@
 <div>
     <audio autoplay id="play"></audio>
 </div>
-
-<div class="btn-group" data-toggle="buttons">
-    <legend class="legend">Сколько разрядов будем тренировать?</legend>
-    <div class="digits">
-        <label>1<input type="radio" name="digits" id="one_digit" value="1"></label>
-        <label>2<input type="radio" name="digits" value="2" id="two_digits"></label>
-        <label>3<input type="radio" name="digits" value="3" id="three_digits"></label>
-        <label>4<input type="radio" name="digits" value="4" id="four_digits"></label>
+<div id="container">
+    <div class="btn-group" data-toggle="buttons">
+        <legend class="legend">Amount of digits to train</legend>
+        <div class="digits">
+            <label>1<input type="radio" name="digits" id="one_digit" value="1"></label>
+            <label>2<input type="radio" name="digits" value="2" id="two_digits"></label>
+            <label>3<input type="radio" name="digits" value="3" id="three_digits"></label>
+            <label>4<input type="radio" name="digits" value="4" id="four_digits"></label>
+        </div>
     </div>
-</div>
 
-<div>
-    <button id="start_button">Дай число</button>
-    <button id="repeat_button">Повтори число</button>
-</div>
+    <div class="buttons_container">
+        <button id="start_button" class="buttons">Give me a number</button>
+        <button id="repeat_button" class="buttons">Repeat the number</button>
+    </div>
 
-<div id="answer_getter">
-    <p>
-        <label>Какое число? <input id="answer" name="answer"></label>
-    </p>
+    <div id="answer_getter">
+
+            <label>What's the number? <input id="answer" name="answer"></label>
+
+        <button type="submit" id="answer_button" class="buttons">Submit your answer</button>
+
+    </div>
+    <div id="result">
+
+    </div>
     <div class="answers" id="success">
-        <button type="submit" id="answer_button">Ввести ответ</button>
-        <p>Верных ответов подряд: </p>
+        <div>Correct answers in a row: </div>
+        <div id="inARow"></div>
     </div>
-</div>
-<div id="result">
 
 </div>
-
 </body>
 </html>
