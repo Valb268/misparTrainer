@@ -6,6 +6,8 @@ let isSubmitted = false;
 const container = document.getElementById("container");
 resizeMargin();
 window.addEventListener('resize', resizeMargin);
+
+// function makes sure the container stays in the center of the page vertically
 function resizeMargin() {
     container.style.marginTop = `${Math.round((visualViewport.height - container.clientHeight) / 2)}px`;
 }
@@ -41,6 +43,7 @@ repeat_button.addEventListener('click', e => {
 answer_button.addEventListener('click', e => submitAnswer());
 answer.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
+        pushSubmitButton();
         submitAnswer();
     }
 });
@@ -186,4 +189,13 @@ function showSuccess() {
     } else {
         inARow.appendChild(div);
     }
+}
+
+function pushSubmitButton() {
+    const submitButton = document.getElementById('answer_button');
+    submitButton.style.boxShadow = '0 0 0 0';
+    setTimeout(() => {
+        submitButton.style.boxShadow = '';
+    }, 250);
+
 }
