@@ -9,6 +9,10 @@
     <script src="./digits.js" defer></script>
     <script src="gapless5.js" type="text/javascript" defer></script>
     <link href="./style.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/ico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ico/favicon-16x16.png">
+    <link rel="manifest" href="/ico/site.webmanifest">
 </head>
 <body>
 <div>
@@ -16,7 +20,7 @@
 </div>
 <div id="container">
     <div class="btn-group" data-toggle="buttons">
-        <legend class="legend">Amount of digits to train</legend>
+        <article class="legend">Amount of digits to train</article>
         <div class="digits">
             <label>1<input type="radio" name="digits" id="one_digit" value="1"></label>
             <label>2<input type="radio" name="digits" value="2" id="two_digits"></label>
@@ -32,7 +36,7 @@
 
     <div id="answer_getter">
 
-            <label>What's the number? <input id="answer" name="answer" type="number"></label>
+            <label>What's the number? <input id="answer" type="number" name="answer"></label>
 
         <button type="submit" id="answer_button" class="buttons">Submit your answer</button>
 
